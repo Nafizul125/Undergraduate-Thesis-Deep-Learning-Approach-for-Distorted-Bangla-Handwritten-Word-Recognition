@@ -181,19 +181,23 @@ Fifteen configurations were tested on the static Kaggle dataset before the enhan
 
 ---
 
+---
+
 ## Citation
 
 If you use this code or the dataset in your work, please cite:
 
 ```bibtex
-@thesis{nassah2026bangla,
+@thesis{sadik2026bangla,
   title={Deep Learning Approach for Distorted Bangla Handwritten Word Recognition},
-  author={Hassan, Mehedi},
+  author={Sadik, Md. Nafizul and Rumi, Md. Toushik and Hasan, Mehedi and Kabir, Mokaddimul and Prity, Tangena Akter},
   school={BRAC University},
   year={2026},
   type={B.Sc. Thesis}
 }
 ```
+
+---
 
 ---
 
