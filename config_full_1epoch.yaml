@@ -1,0 +1,61 @@
+# Pix2Pix Training Configuration
+# 1 Epoch Test on FULL Dataset (14,356 images)
+
+# Device Configuration
+device: "cuda"
+
+# Dataset
+dataset:
+  root: "./data_fixed"
+  train_dir: "./data_fixed/train"
+  val_dir: "./data_fixed/val"
+  test_dir: "./data_fixed/test"
+  image_size: 256
+  batch_size: 16
+  num_workers: 2
+  shuffle: true
+  pin_memory: true
+
+# Model Architecture
+model:
+  generator:
+    input_channels: 3
+    output_channels: 3
+    num_filters: 64
+    num_blocks: 7
+  discriminator:
+    input_channels: 6
+    num_filters: 64
+    num_layers: 3
+
+# Training
+training:
+  num_epochs: 10  # Train multiple epochs to find best model
+  learning_rate_gen: 0.0002
+  learning_rate_dis: 0.0001  # Lower discriminator LR
+  beta1: 0.5
+  lambda_l1: 30  # AGGRESSIVE: Further reduced to force bolder reconstruction
+  lambda_gan: 0.25  # AGGRESSIVE: Increased for stronger adversarial signal
+  lambda_perceptual: 5  # AGGRESSIVE: Increased to preserve style
+  save_interval: 1
+  val_interval: 0  # Skip validation to save time
+  use_mixed_precision: true
+  dis_train_freq: 2  # Train discriminator every 2nd iteration to stabilize
+
+# Optimization
+optimizer:
+  type: "adam"
+  momentum: 0.9
+  weight_decay: 0.0
+
+# Logging & Monitoring
+logging:
+  log_interval: 200
+  tensorboard_dir: "./runs"
+  checkpoint_dir: "./checkpoints"
+  sample_dir: "./samples_full_1epoch"  # Separate folder for full-dataset results
+  sample_interval: 1
+
+# Augmentation
+augmentation:
+  enable: true

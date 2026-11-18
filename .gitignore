@@ -1,0 +1,61 @@
+# Model checkpoints (too large for GitHub — see README for download link)
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+
+# Dataset (not redistributed — see README for access)
+data_raw/
+data/
+manifests/
+dataset-metadata.json
+
+# Training outputs
+runs/
+samples/
+eval_best/
+eval_epoch75/
+thesis_figures/
+gallery.html
+
+# Temporary / generated files
+temp_*.png
+single_test_result.png
+sample_verification.png
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Logs
+*.log
+training_output.txt
+training_attempt2.txt
+training_fixed.txt
+training_improved.txt
+training_run_new.log
+training_full_run.log
+
+# Old/backup files
+models_backup.py
+fix_dataset.py
+inspect_dataset.py
+generate_dataset.py
+00_START_HERE.txt
+QUICK_START.md
+README_TRAINING.md
+TRAINING_GUIDE.md
+IMPLEMENTATION_SUMMARY.md
+ENHANCEMENTS.md
+
+# Misc
+raw data/
+sample report/
+thesis template/
+docs/
+quickstart.bat
+quickstart.sh
+.DS_Store
+Thumbs.db
+*.zip

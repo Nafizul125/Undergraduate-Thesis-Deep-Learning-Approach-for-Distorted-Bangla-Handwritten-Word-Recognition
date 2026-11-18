@@ -1,0 +1,63 @@
+# Quick Validation Test Config - Subset of Data
+# Purpose: Fast 30-40 min test to validate approach before full training
+
+# Device Configuration
+device: "cuda"
+
+# Dataset - REDUCED for quick testing
+dataset:
+  root: "./data_minimal"
+  train_dir: "./data_minimal/train"
+  val_dir: "./data_minimal/val"
+  test_dir: "./data_minimal/test"
+  image_size: 256
+  batch_size: 16
+  num_workers: 2
+  shuffle: true
+  pin_memory: true
+  max_train_samples: 2000  # REDUCED from 14,356 for fast testing
+
+# Model Architecture
+model:
+  generator:
+    input_channels: 3
+    output_channels: 3
+    num_filters: 64
+    num_blocks: 7
+  discriminator:
+    input_channels: 6
+    num_filters: 64
+    num_layers: 3
+
+# Training - FAST TEST SETTINGS
+training:
+  num_epochs: 1  # Just 1 epoch for validation
+  learning_rate_gen: 0.0002
+  learning_rate_dis: 0.0002
+  beta1: 0.5
+  lambda_l1: 100
+  lambda_gan: 2.0
+  lambda_perceptual: 5  # Keep perceptual loss to test handwriting style
+  save_interval: 1
+  val_interval: 0  # SKIP validation - saves time
+  use_mixed_precision: true
+
+# Optimization
+optimizer:
+  type: "adam"
+  momentum: 0.9
+  weight_decay: 0.0
+
+# Logging & Monitoring - MINIMAL
+logging:
+  log_interval: 200
+  tensorboard_dir: "./runs"
+  checkpoint_dir: "./checkpoints"
+  sample_dir: "./samples_quicktest"  # Separate folder for test samples
+  sample_interval: 1  # Generate samples at end of epoch for validation
+
+# Augmentation
+augmentation:
+  enable: true
+  random_flip: true
+  random_crop: false

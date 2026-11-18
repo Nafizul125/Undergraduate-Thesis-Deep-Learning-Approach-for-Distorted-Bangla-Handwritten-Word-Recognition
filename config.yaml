@@ -1,0 +1,63 @@
+# Pix2Pix Training Configuration
+# Bangla Handwritten Text Restoration
+
+device: "cuda"
+
+# Dataset — online damage mode
+# Fresh random damage applied every epoch → no overfitting
+dataset:
+  online_damage: true
+  crops_dir: "./data_raw/word_crops"   # clean word crops
+  damage_preset: "distorted"           # minimal / medium / demo / distorted
+  image_size: 256
+  batch_size: 16
+  num_workers: 2
+  shuffle: true
+  pin_memory: true
+  max_train_samples: null
+
+# Model Architecture
+model:
+  generator:
+    input_channels: 3
+    output_channels: 3
+    num_filters: 64
+    num_blocks: 7
+  discriminator:
+    input_channels: 6
+    num_filters: 64
+    num_layers: 3
+
+# Training
+training:
+  num_epochs: 10
+  learning_rate_gen: 0.0001
+  learning_rate_dis: 0.0001
+  beta1: 0.5
+  lambda_l1: 80
+  lambda_gan: 2.0
+  lambda_perceptual: 10
+  save_interval: 999
+  val_interval: 1
+  use_mixed_precision: true
+  dis_train_freq: 1
+
+# Optimization
+optimizer:
+  type: "adam"
+  momentum: 0.9
+  weight_decay: 0.0
+
+# Logging
+logging:
+  log_interval: 200
+  tensorboard_dir: "./runs"
+  checkpoint_dir: "./checkpoints"
+  sample_dir: "./samples"
+  sample_interval: 1
+
+# Augmentation (works in both online and offline mode)
+augmentation:
+  enable: true
+  random_flip: true    # horizontal flip — doubles effective training data
+  random_crop: false
